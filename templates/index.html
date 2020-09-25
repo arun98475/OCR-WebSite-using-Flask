@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% block content %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>WILTO</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Favicons -->
+    <link href='{{url_for('static', filename="img/favicon.png")}}' rel="icon">
+    <link href='{{url_for('static', filename="img/apple-touch-icon.png")}}' rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700"
+      rel="stylesheet">
+
+    <!-- Bootstrap CSS File -->
+    <link href='{{url_for('static', filename="lib/bootstrap/css/bootstrap.min.css")}}' rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+    <link href='{{url_for('static', filename="lib/font-awesome/css/font-awesome.min.css")}}' rel="stylesheet">
+    <link href='{{url_for('static', filename="css/animate.min.css")}}' rel="stylesheet">
+
+    <!-- Main Stylesheet File -->
+    <link href='{{url_for('static', filename="css/style.css")}}' rel="stylesheet">
+    
+    {%- for category, message in get_flashed_messages(with_categories = true) %}
+    <div class="alert alert-{{category}} alert-dismissible" style="z-index: 1000;">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Alert!</strong> {{message}}
+    </div>
+   {%- endfor %}  
+
+  </head>
+
+  <body>
+
+    <!--==========================
+  Header
+  ============================-->
+    <header id="header">
+      <div class="container">
+
+        <div id="logo" class="pull-left">
+          <!-- <a href="#hero"><img src="img/logo.png" alt="" title="" /></img></a>-->
+          <!-- Uncomment below if you prefer to use a text logo -->
+          <h1><a href="/"><u>WILTO</u></a></h1>
+        </div>
+      </div>
+    </header><!-- #header -->
+
+    <!--==========================
+    Hero Section
+  ============================-->
+    <section id="hero">
+      <div class="hero-container">
+        <h1>Welcome to WILTO OCR system</h1>
+        <h2>Upload your image(.png, .jpg, .jpeg, .gif format) and get in editable text format</h2>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+          <div class="row container-fluid justify-content-center">
+            <input type="file" class="form-control-file border" id="customFile"
+              name="file">
+          </div>
+          <input type="submit" value="Upload" class="btn-get-started" />
+        </form>
+        {% if filename %}
+        <a href="/download/{{filename.file}}">Download your file</a>
+        {% endif %}
+      </div>
+    </section><!-- #hero -->
+
+  </body>
+  {% endblock %}
+</html>
